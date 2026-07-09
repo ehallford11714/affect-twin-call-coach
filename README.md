@@ -6,7 +6,7 @@
 
 **Real-time call/video coach: face/call KPIs to affect/intent proxies to suggested next utterance + expression preview.**
 
-Package: `affecttwin` · Product **P10** in the causal research suite.
+Package: `affecttwin` - Product **P10** in the causal research suite.
 
 ## Install
 
