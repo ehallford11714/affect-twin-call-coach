@@ -58,9 +58,11 @@ class AffectTwinPipeline:
         nfs_url: str = DEFAULT_NFS_URL,
         prefer_nfs: bool = True,
         nfs_timeout: float = 2.5,
+        prefer_slm: bool = False,
     ) -> None:
         self.client = NextFrameSeqClient(nfs_url, timeout=nfs_timeout)
         self.prefer_nfs = prefer_nfs
+        self.prefer_slm = prefer_slm
 
     def run(
         self,
@@ -70,6 +72,7 @@ class AffectTwinPipeline:
         context_hint: str = "",
         goal: str = "",
         try_nfs: bool | None = None,
+        use_slm: bool | None = None,
     ) -> CoachResult:
         if kpis is None:
             face_kpis = synthetic_kpis(scenario=scenario)
@@ -98,6 +101,18 @@ class AffectTwinPipeline:
                 if nfs_payload:
                     nfs_used = True
 
+        slm_on = self.prefer_slm if use_slm is None else use_slm
+        extras: dict[str, Any] = {"nfs_url": self.client.base_url, "scenario": scenario}
+        if slm_on:
+            try:
+                from affecttwin.slm_hooks import narrate_affect
+
+                extras["slm_narrative"] = narrate_affect(
+                    affect, suggestion=suggestion, use_slm=True
+                )
+            except Exception as e:  # noqa: BLE001
+                extras["slm_narrative"] = {"error": f"{type(e).__name__}: {e}"}
+
         return CoachResult(
             kpis=face_kpis,
             insight=insight,
@@ -106,5 +121,5 @@ class AffectTwinPipeline:
             expression_preview=preview,
             nfs_used=nfs_used,
             nfs_payload=nfs_payload,
-            extras={"nfs_url": self.client.base_url, "scenario": scenario},
+            extras=extras,
         )
