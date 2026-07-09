@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "affecttwin"
+version = "0.1.0"
+description = "AffectTwin Call Coach — face KPIs → affect/intent proxies → next utterance + expression preview"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Ephraim Hallford" }]
+keywords = ["affect", "coaching", "call", "video", "kpi", "causal", "ethics"]
+dependencies = [
+  "numpy>=1.24",
+  "opencv-python-headless>=4.8",
+  "requests>=2.31",
+]
+
+[project.optional-dependencies]
+ui = ["streamlit>=1.28", "Pillow>=10.0"]
+api = ["fastapi>=0.110", "uvicorn[standard]>=0.27", "pydantic>=2.0", "python-multipart>=0.0.9"]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+all = ["affecttwin[ui,api,dev]"]
+
+[project.scripts]
+affecttwin = "affecttwin.cli:main"
+callcoach = "affecttwin.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

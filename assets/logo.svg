@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="AffectTwin Call Coach">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E879F9"/>
+      <stop offset="100%" stop-color="#A21CAF"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#2E1065"/>
+  <circle cx="52" cy="54" r="22" fill="none" stroke="#F0ABFC" stroke-width="4"/>
+  <circle cx="44" cy="50" r="3.5" fill="#F5D0FE"/>
+  <circle cx="60" cy="50" r="3.5" fill="#F5D0FE"/>
+  <path d="M42 62c4 8 16 8 20 0" fill="none" stroke="#E879F9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M78 40c14 6 22 20 22 36-8 0-16-2-22-8" fill="url(#g)" opacity="0.9"/>
+  <circle cx="96" cy="84" r="8" fill="#F5D0FE"/>
+</svg>
